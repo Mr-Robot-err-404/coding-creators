@@ -1,7 +1,7 @@
 import axios from "axios"
 import { isCurrDayEven } from "./isCurrDayEven"
 
-export async function getChannelStats(arr:any[], type:string) {
+export async function getChannelStats(arr:any, type:string) {
     let key:any
     let isDayEven:boolean = isCurrDayEven()
     if(isDayEven) {

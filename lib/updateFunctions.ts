@@ -3,7 +3,7 @@ import axios from "axios"
 import { Rank } from "./sortingFunctions"
 import { isCurrDayEven } from "./isCurrDayEven"
 
-export async function updateRecentVid(arr:any[], page:string) {
+export async function updateRecentVid(arr:any, page:string) {
   let order:string = "date"
   let key:any
   let isDayEven:boolean = isCurrDayEven()
@@ -35,7 +35,7 @@ export async function updateRecentVid(arr:any[], page:string) {
   }
 }
 
-export async function updatePopularVid(arr:any[], page:string) {
+export async function updatePopularVid(arr:any, page:string) {
   let order:string = "viewCount"
   let key:any
   let isDayEven:boolean = isCurrDayEven()
@@ -68,7 +68,7 @@ export async function updatePopularVid(arr:any[], page:string) {
   }
 }
 
-export async function updateCreators(currArr: any[], newData:any[], rank:Rank, category:number) {
+export async function updateCreators(currArr: any, newData:any, rank:Rank, category:number) {
   for(var i = 0; i < newData.length; i++){
     let id = newData[i].id
     let currData

@@ -1,6 +1,6 @@
 import prisma from "@/prisma/client"
 
-export function sortNewCreators(arr:any[]): [any[], any[], Rank] {
+export function sortNewCreators(arr:any): [any, any, Rank] {
     let copy = [...arr]
     let rank: Rank = {}
     const subOrder = arr.sort((a:any,b:any) => parseInt(b.statistics.subscriberCount) - parseInt(a.statistics.subscriberCount))
@@ -19,9 +19,9 @@ export function sortNewCreators(arr:any[]): [any[], any[], Rank] {
 
 export interface Rank {
     [key: string]: [number, number];
-  }
+}
 
-  async function postCreators(arr: any[], rank:Rank) {
+  async function postCreators(arr: any, rank:Rank) {
     for(var i = 0; i < arr.length; i++){
       const subRank:number = rank[arr[i].id][0]
       const vidRank:number = rank[arr[i].id][1]

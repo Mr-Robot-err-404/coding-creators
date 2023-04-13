@@ -1,4 +1,3 @@
-import axios from "axios"
 import { fetchData } from "../../../lib/fetchData"
 import { sortNewCreators } from "../../../lib/sortingFunctions"
 import { updateCreators } from "../../../lib/updateFunctions"
