@@ -1,90 +1,113 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from './page.module.css'
+import axios from "axios"
+import prisma from "@/prisma/client"
+import { webDev } from '../lib/channels'
+import Leaderboard from "./Leaderboard"
+import { updateRecentVid } from "@/lib/updateFunctions"
 
-const inter = Inter({ subsets: ['latin'] })
+interface Rank {
+  [key: string]: [number, number];
+}
 
-export default function Home() {
+async function getChannelStats(page:string) {
+  let key:any
+  if(page === 'webdev') key = process.env.API_KEY_8
+  else if(page === 'gamedev') key = process.env.API_KEY_9
+  else key = process.env.API_KEY
+  let IDs = `${webDev[0].id}`
+  for(var i = 1; i < webDev.length; i++){
+    IDs += `%2C${webDev[i].id}`
+  }
+  try {
+    const { data }  =  await axios.get(`https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2Cstatistics&id=${IDs}&maxResults=50&key=${key}`)
+    return data.items
+  } catch (error:any) {
+    console.log(error)
+  }
+} 
+
+async function updateCreators(arr: any[], rank:Rank) {
+  for(var i = 0; i < arr.length; i++){
+    const subRank:number = rank[arr[i].id][0]
+    const vidRank:number = rank[arr[i].id][1]
+    const snippet = arr[i].snippet
+    const stats = arr[i].statistics
+    const profilePic = snippet.thumbnails.default.url
+    try {
+      await prisma.creator.update({
+        where: {id: arr[i].id},
+        data: {
+          subs: {
+            1:[stats.subscriberCount],
+          },
+          views: {
+            1:[stats.viewCount],
+          },
+          videoNum: {
+            1:[stats.videoCount],
+          },
+          rank: {
+            1: [{0:subRank, 1:vidRank}],
+          },
+          picture: profilePic,
+          category: 1
+        }
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+function sortWebDev(arr:any[]): [any[], any[]] {
+  let month = '1', day = '0'
+  let copy = [...arr]
+  const subOrder = arr.sort((a:any,b:any) => parseInt(b.subs[month][day]) - parseInt(a.subs[month][day]))
+  const viewOrder = copy.sort((a:any,b:any) => parseInt(b.views[month][day]) - parseInt(a.views[month][day]))
+  return [subOrder, viewOrder]
+}
+
+
+async function fetchData() {
+  try {
+    const data = await prisma.creator.findMany({
+      where: {
+        category: 1
+      },
+      select: {
+        id: true,
+        title: true,
+        createdAt: false,
+        updatedAt: false, 
+        subs: true, 
+        views: true, 
+        weeklyViews: true, 
+        monthlyViews: true, 
+        videoNum: true, 
+        recentVid: true, 
+        popularVid: true, 
+        rank: true, 
+        picture: true, 
+        category: true
+      }
+    })
+    return data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export default async function Home() {
+  // const [sortedArrays, rank] = sortWebDev(arr)
+  const arr = await fetchData()
+  const [subOrder, viewOrder] = sortWebDev(arr)
+  // await updateRecentVid(arr, "recent", "webdev")
+  // await updateRecentVid(arr, "popular", "webdev")
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main>
+      <div>
+        <div className="flex justify-center">
+          <Leaderboard subOrder={subOrder} viewOrder={viewOrder} title="WebDev Leaderboard"/>
         </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-        <div className={styles.thirteen}>
-          <Image src="/thirteen.svg" alt="13" width={40} height={31} priority />
-        </div>
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
       </div>
     </main>
   )
