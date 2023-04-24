@@ -6,12 +6,12 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
 model Creator {
-  id           String    @id 
+  id           String    @id @map("_id")
   title        String
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
@@ -26,5 +26,8 @@ model Creator {
   rank         Json
   picture      String?
   category     Int?
+  profilePic   String?
+  tag          String?
+  page         String?
 }
 

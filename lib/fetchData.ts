@@ -20,7 +20,8 @@ export async function fetchData(category:number) {
           popularVid: true, 
           rank: true, 
           picture: true, 
-          category: true
+          category: true,
+          profilePic: true, 
         }
       })
       return data

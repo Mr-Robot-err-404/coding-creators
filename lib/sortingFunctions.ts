@@ -1,4 +1,7 @@
-import prisma from "@/prisma/client"
+import recentMonthAndDay from "./recentMonthAndDay";
+export interface Rank {
+  [key: string]: [number, number]
+}
 
 export function sortNewCreators(arr:any): [any, any, Rank] {
     let copy = [...arr]
@@ -17,40 +20,44 @@ export function sortNewCreators(arr:any): [any, any, Rank] {
     return [subOrder, viewOrder, rank]
   }
 
-export interface Rank {
-    [key: string]: [number, number];
-}
-
-  async function postCreators(arr: any, rank:Rank) {
-    for(var i = 0; i < arr.length; i++){
-      const subRank:number = rank[arr[i].id][0]
-      const vidRank:number = rank[arr[i].id][1]
-      const snippet = arr[i].snippet
-      const stats = arr[i].statistics
-      const profilePic = snippet.thumbnails.default.url
-      try {
-        await prisma.creator.create({
-          data: {
-            id: arr[i].id, 
-            title: snippet.title,
-            subs: {
-              1:[stats.subscriberCount],
-            },
-            views: {
-              1:[stats.viewCount],
-            },
-            videoNum: {
-              1:[stats.videoCount],
-            },
-            rank: {
-              1: [{0:subRank, 1:vidRank}],
-            },
-            picture: profilePic,
-            category: 2
-          }
-        })
-      } catch (error) {
-        console.log(error)
+  export function bubbleSort(arr:any, type:string) {
+    let swapped = true
+    let end = arr.length - 1
+    while (swapped) {
+      swapped = false
+      for (let i = 0; i < end; i++) {
+        const [recentMonth, recentDay] = recentMonthAndDay(arr[i], type)
+        const [recentMonth2, recentDay2] = recentMonthAndDay(arr[i + 1], type)
+        let currVal = arr[i][type][`${recentMonth}`][recentDay]
+        let currVal2 = arr[i + 1][type][`${recentMonth2}`][recentDay2]
+        if (parseInt(currVal) < parseInt(currVal2)) {
+          let temp = arr[i];
+          arr[i] = arr[i + 1];
+          arr[i + 1] = temp;
+          swapped = true; 
+        }
       }
+      end--
     }
+    return arr
+  }
+
+  export function bubbleSortWeeklyViews(arr:any) {
+    let swapped = true
+    let end = arr.length - 1
+    while (swapped) {
+      swapped = false
+      for (let i = 0; i < end; i++) {
+        let currVal = parseInt(arr[i].weeklyViews)
+        let currVal2 = parseInt(arr[i + 1].weeklyViews)
+        if (currVal < currVal2) {
+          let temp = arr[i]
+          arr[i] = arr[i + 1]
+          arr[i + 1] = temp
+          swapped = true
+        }
+      }
+      end--
+    }
+    return arr
   }

@@ -13,8 +13,10 @@ function rounding(val:string, power:number, digits:number) {
 export function convertStats(viewOrder:any[]) {
     let arr1: any[] = [], arr2: any[] = []
     viewOrder.forEach((val) => {
-        arr1.push(val.views['1'][0])
-        arr2.push(val.subs['1'][0])
+        let recentMonth:number = Object.keys(val.subs).length
+        let recentDay:number = val.subs[`${recentMonth}`].length - 1
+        arr1.push(val.views[`${recentMonth}`][recentDay])
+        arr2.push(val.subs[`${recentMonth}`][recentDay])
     })
     for(var i = 0; i < arr1.length; i++){
         let digits = arr1[i].length

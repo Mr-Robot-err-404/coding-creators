@@ -1,8 +1,8 @@
-import { fetchData } from "../../../lib/fetchData"
-import { sortNewCreators } from "../../../lib/sortingFunctions"
-import { updateCreators } from "../../../lib/updateFunctions"
-import { updateRecentVid } from "../../../lib/updateFunctions"
-import { updatePopularVid } from "../../../lib/updateFunctions"
+import { fetchData } from "./fetchData"
+import { sortNewCreators } from "./sortingFunctions"
+import { updateCreators } from "./updateFunctions"
+import { updateRecentVid } from "./updateFunctions"
+import { updatePopularVid } from "./updateFunctions"
 import { getChannelStats } from "@/lib/getChannelStats"
 
 export default async function main() {
