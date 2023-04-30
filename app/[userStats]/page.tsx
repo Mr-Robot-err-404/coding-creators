@@ -44,7 +44,7 @@ export default async function userPage({ params } : any) {
    const [weeklyViews, monthlyViews] = monthlyStats(stats.views, recentMonth, recentDay)
    const [weeklyVids, monthlyVids] = monthlyStats(stats.videoNum, recentMonth, recentDay)
    return (
-      <div className="flex justify-center">
+      <div className="flex justify-center items-center">
         {/* <div>
           <Link href={stats.category === 1 ? '/' : stats.category === 2 ? '/gamedev' : "/comsci"}>
             <button type="button" className="text-white h-10 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mt-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">

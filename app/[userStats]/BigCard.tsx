@@ -1,5 +1,10 @@
 "use client"
 import Link from "next/link"
+import { Quicksand } from "@next/font/google"
+
+const quicksand = Quicksand({
+    subsets: ['latin']
+})
 
 export default function BigCard({title, page, tag, profilePic, category, subs, views, videoNum, recentVid, popularVid, weeklySubs, weeklyViews, weeklyVids, monthlySubs, monthlyViews, monthlyVids} : any) {
     return (
@@ -11,7 +16,7 @@ export default function BigCard({title, page, tag, profilePic, category, subs, v
                     </div>
                     <div className="flex justify-center">
                         <div className="grid grid-rows-2 gap-0">
-                            <h2 className="text-white text-2xl">{title}</h2>
+                            <h2 className={`text-white text-2xl ${quicksand.className}`}>{title}</h2>
                             <h3 className="text-gray-400 text-md">{tag}</h3>
                         </div>
                     </div>
@@ -24,11 +29,11 @@ export default function BigCard({title, page, tag, profilePic, category, subs, v
                     </div>
                 </div>
                 <hr className="my-4 border-gray-500"/>
-                <div className="grid grid-cols-2">
+                <div className={`grid grid-cols-2 ${quicksand.className}`}>
                     <div className="grid grid-cols-2 py-3">
                         <div className="grid grid-rows-7 justify-center">
                             <div className="flex justify-center">
-                                <h3 className="text-white text-xl">This week</h3>
+                                <h3 className={`text-white text-xl ${quicksand.className}`}>This week</h3>
                             </div>
                             <div>
                                 <hr className="border-gray-500 my-2"/>
@@ -51,7 +56,7 @@ export default function BigCard({title, page, tag, profilePic, category, subs, v
                         </div>
                         <div className="grid grid-rows-7 justify-center">
                             <div className="flex justify-center">
-                                <h3 className="text-white text-xl">This month</h3>
+                                <h3 className={`text-white text-xl ${quicksand.className}`}>This month</h3>
                             </div>
                             <div>
                                 <hr className="border-gray-500 my-2"/>
@@ -78,7 +83,7 @@ export default function BigCard({title, page, tag, profilePic, category, subs, v
                             <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-800">
                                 <li className="py-3">
                                     <div className="grid grid-cols-3">
-                                        <h3 className="text-white text-lg">Views:</h3>
+                                        <h3 className="text-white text-lg">Views</h3>
                                         <div className="flex justify-center">
                                             <h3 className="text-white text-lg">{views}</h3>
                                         </div>
@@ -86,7 +91,7 @@ export default function BigCard({title, page, tag, profilePic, category, subs, v
                                 </li>
                                 <li className="py-3">
                                     <div className="grid grid-cols-3">
-                                        <h3 className="text-white text-lg">Subs:</h3>
+                                        <h3 className="text-white text-lg">Subs</h3>
                                         <div className="flex justify-center">
                                             <h3 className="text-white text-lg">{subs}</h3>
                                         </div>
@@ -94,7 +99,7 @@ export default function BigCard({title, page, tag, profilePic, category, subs, v
                                 </li>
                                 <li className="py-3">
                                     <div className="grid grid-cols-3">
-                                        <h3 className="text-white text-lg">Videos:</h3>
+                                        <h3 className="text-white text-lg">Videos</h3>
                                         <div className="flex justify-center">
                                             <h3 className="text-white text-lg">{videoNum}</h3>
                                         </div>
@@ -102,7 +107,7 @@ export default function BigCard({title, page, tag, profilePic, category, subs, v
                                 </li>
                                 <li className="py-3">
                                     <div className="grid grid-cols-3">
-                                    <h3 className="text-white text-lg">Recent release:</h3>
+                                    <h3 className="text-white text-lg">Recent release</h3>
                                         <div className="flex justify-center">
                                             <a target="_blank" href={"https://www.youtube.com/watch?v=" + recentVid} className="font-medium text-blue-600 dark:text-blue-400 hover:underline">Watch</a>
                                         </div>
@@ -110,9 +115,17 @@ export default function BigCard({title, page, tag, profilePic, category, subs, v
                                 </li>
                                 <li className="py-3">
                                     <div className="grid grid-cols-3">
-                                        <h3 className="text-white text-lg">Most viewed:</h3>
+                                        <h3 className="text-white text-lg">Most viewed</h3>
                                         <div className="flex justify-center">
                                             <a target="_blank" href={"https://www.youtube.com/watch?v=" + popularVid}  className="font-medium text-blue-600 dark:text-blue-400 hover:underline">Watch</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li className="py-3">
+                                    <div className="grid grid-cols-3">
+                                        <h3 className="text-white text-lg">Category</h3>
+                                        <div className="flex justify-center">
+                                            <h3 className="text-white text-lg">{category == 1 ? "Web Dev" : category == 2 ? "Game Dev & AI" : "Data Science"}</h3>
                                         </div>
                                     </div>
                                 </li>
