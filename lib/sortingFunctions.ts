@@ -1,4 +1,4 @@
-import recentMonthAndDay from "./recentMonthAndDay";
+import recentMonthAndDay from "./recentMonthAndDay"
 export interface Rank {
   [key: string]: [number, number]
 }
