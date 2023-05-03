@@ -1,10 +1,13 @@
 import prisma from "@/prisma/client"
 
-export async function fetchData(category:number) {
+export async function fetchData(category:number, category2: any) {
     try {
       const data = await prisma.creator.findMany({
         where: {
-          category: category
+          OR: [
+            { category: category },
+            { category: category2 }
+          ],
         },
         select: {
           id: true,

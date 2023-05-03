@@ -74,7 +74,7 @@ export default function BigCard({title, page, tag, profilePic, category, subs, v
                                 <hr className="border-gray-500 my-2"/>
                             </div>
                             <div className="flex justify-center">
-                                <h3 className="text-white text-lg">{monthlyVids == 1 ? "1 release" : monthlyVids > 1 ? `${monthlyVids} releases` : monthlyVids}</h3>
+                                <h3 className="text-white text-lg">{monthlyVids == 1 ? "1 release" : monthlyVids > 1 ? `${monthlyVids} releases` : monthlyVids ? monthlyVids : "-"}</h3>
                             </div>
                         </div>
                     </div>
@@ -125,7 +125,7 @@ export default function BigCard({title, page, tag, profilePic, category, subs, v
                                     <div className="grid grid-cols-3">
                                         <h3 className="text-white text-lg">Category</h3>
                                         <div className="flex justify-center">
-                                            <h3 className="text-white text-lg">{category == 1 ? "Web Dev" : category == 2 ? "Game Dev & AI" : "Data Science"}</h3>
+                                            <h3 className="text-white text-lg">{category == 1 ? "Web Dev" : category == 2 ? "Game Dev" : category == 3 ? "ComSci" : category == 4 ? "Data Science" : "Game Dev & AI"}</h3>
                                         </div>
                                     </div>
                                 </li>

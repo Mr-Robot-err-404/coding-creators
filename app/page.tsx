@@ -12,7 +12,7 @@ function sortWebDev(arr:any[]): [any[], any[], any[]] {
 }
 
 export default async function Home() {
-  const arr = await fetchData(1)
+  const arr = await fetchData(1, null)
   const [subOrder, viewOrder, weeklyViewOrder] = sortWebDev(arr)
   return (
     <main>

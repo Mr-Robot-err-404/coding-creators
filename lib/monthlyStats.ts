@@ -56,8 +56,10 @@ export function monthlyStats(val : any, recentMonth: any, recentDay: any) {
             dayCount++
         }
     }
-    if(weeklyIncrease) weeklyIncrease = convertStats(weeklyIncrease)
-    if(monthlyIncrease) monthlyIncrease = convertStats(monthlyIncrease)
-    else if(dayCount < 20) monthlyIncrease = "coming soon"
+    if(weeklyIncrease && weeklyIncrease > 0) weeklyIncrease = convertStats(weeklyIncrease)
+    else weeklyIncrease = ""
+    if(dayCount < 20) monthlyIncrease = "coming soon"
+    else if(monthlyIncrease && monthlyIncrease > 0) monthlyIncrease = convertStats(monthlyIncrease)
+    else monthlyIncrease = "-"
     return [weeklyIncrease, monthlyIncrease]
 }

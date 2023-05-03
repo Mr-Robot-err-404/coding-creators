@@ -12,7 +12,7 @@ function sortGameDev(arr:any[]): [any[], any[], any[]] {
 }
 
 export default async function GameDev() {
-    const arr = await fetchData(2)
+    const arr = await fetchData(2, 7)
     const [subOrder, viewOrder, weeklyViewOrder] = sortGameDev(arr)
     return (
         <div className="flex justify-center">

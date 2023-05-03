@@ -11,7 +11,7 @@ export default function Headings({handleClick, option} : any) {
         <li className={`h-16 ${quicksand.className}`}>
             <div className="flex items-center h-10">
                 <div className="flex-shrink-0">
-                    <img className="w-14 h-0 rounded-full opacity-0" src="https://yt3.ggpht.com/ytc/AGIKgqNNqEOUWsALiAsHQWVtnretxTydSUyBVTNnXY4GZg=s240-c-k-c0x00ffffff-no-rj" alt="Profile Pic"/>
+                    <img className="w-14 h-0 rounded-full opacity-0" src="https://yt3.ggpht.com/ytc/AGIKgqMu8cJ8ZV64SbBS-Qa3cmkQGub-H7pEdK0lh7DPqUA=s240-c-k-c0x00ffffff-no-rj" alt="Profile Pic"/>
                 </div>
                 <div className="flex flex-row justify-center items-center">
                     <div className="flex flex-col justify-center items-center border-r-2 border-gray-600 pr-4 w-40">

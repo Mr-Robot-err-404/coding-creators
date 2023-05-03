@@ -13,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className='scrollbar-hide'>
+      <body className='scrollbar-thin'>
         <NavBar/>
         {children}
       </body>

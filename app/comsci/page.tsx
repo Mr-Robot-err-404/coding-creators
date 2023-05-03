@@ -12,7 +12,7 @@ function sortComSci(arr:any[]): [any[], any[], any[]] {
   }
 
 export default async function ComSci() {
-    const arr = await fetchData(3)
+    const arr = await fetchData(3, 4)
     const [subOrder, viewOrder, weeklyViewOrder] = sortComSci(arr)
     return (
         <div className="flex justify-center">
