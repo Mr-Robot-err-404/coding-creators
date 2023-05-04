@@ -14,7 +14,7 @@ export default function Leaderboard({subOrder, viewOrder, weeklyViewOrder, title
     const handleClick = (option: string) => setOption(option)
 
     return (
-        <div className="w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+        <div className="w-full max-w-4xl p-4 border rounded-lg shadow sm:p-8 bg-gray-800 border-gray-700">
             <div className="flow-root">
                 <ul role="list" className="divide-y divide-gray-200">
                     <>

@@ -9,7 +9,7 @@ const quicksand = Quicksand({
 export default function BigCard({title, page, tag, profilePic, category, subs, views, videoNum, recentVid, popularVid, weeklySubs, weeklyViews, weeklyVids, monthlySubs, monthlyViews, monthlyVids} : any) {
     return (
         <div className="flex justify-center py-2">
-            <div className="w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+            <div className="w-full max-w-4xl p-4 border rounded-lg shadow sm:p-8 bg-gray-800 border-gray-700">
                 <div className="grid grid-cols-3 gap-4 items-center">
                     <div className="flex justify-start">
                         <img className="w-1/2 rounded-full" src={profilePic} alt="Profile Picture"/>
@@ -22,7 +22,7 @@ export default function BigCard({title, page, tag, profilePic, category, subs, v
                     </div>
                     <div className="flex justify-end">
                         <Link href={page} target="_blank">
-                            <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                            <button type="button" className="text-white focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-blue-800">
                                 Visit Page
                             </button>
                         </Link>                        
@@ -79,8 +79,8 @@ export default function BigCard({title, page, tag, profilePic, category, subs, v
                         </div>
                     </div>
                     <div className="flex justify-center px-2 items-center py-3">
-                        <div className="w-full p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-700 dark:border-gray-600">
-                            <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-800">
+                        <div className="w-full p-2 border rounded-lg shadow bg-gray-700 border-gray-600">
+                            <ul role="list" className="divide-y divide-gray-800">
                                 <li className="py-3">
                                     <div className="grid grid-cols-3">
                                         <h3 className="text-white text-lg">Views</h3>
@@ -109,7 +109,7 @@ export default function BigCard({title, page, tag, profilePic, category, subs, v
                                     <div className="grid grid-cols-3">
                                     <h3 className="text-white text-lg">Recent release</h3>
                                         <div className="flex justify-center">
-                                            <a target="_blank" href={"https://www.youtube.com/watch?v=" + recentVid} className="font-medium text-blue-600 dark:text-blue-400 hover:underline">Watch</a>
+                                            <a target="_blank" href={"https://www.youtube.com/watch?v=" + recentVid} className="font-medium text-blue-400 hover:underline">Watch</a>
                                         </div>
                                     </div>
                                 </li>
@@ -117,7 +117,7 @@ export default function BigCard({title, page, tag, profilePic, category, subs, v
                                     <div className="grid grid-cols-3">
                                         <h3 className="text-white text-lg">Most viewed</h3>
                                         <div className="flex justify-center">
-                                            <a target="_blank" href={"https://www.youtube.com/watch?v=" + popularVid}  className="font-medium text-blue-600 dark:text-blue-400 hover:underline">Watch</a>
+                                            <a target="_blank" href={"https://www.youtube.com/watch?v=" + popularVid}  className="font-medium text-blue-400 hover:underline">Watch</a>
                                         </div>
                                     </div>
                                 </li>
